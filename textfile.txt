@@ -1,0 +1,2 @@
+This is a sample text file for Python.
+I'm really learning it well with Bucky. He is quite a teacher.
