@@ -6,7 +6,7 @@ class ExampleThread(threading.Thread):
         for _ in range(5):
             print(threading.currentThread().getName())
 
-x= ExampleThread(name = 'First thread')
+x = ExampleThread(name = 'First thread')
 y = ExampleThread(name = 'Second thread')
 
 x.start()
