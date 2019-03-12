@@ -2,7 +2,7 @@ import random
 import time 
 
 class Ssn:
-    random.seed(time.time()
+    random.seed(time.time())
 
     ssn = random.randrange(1000000000,9999999999)
 
