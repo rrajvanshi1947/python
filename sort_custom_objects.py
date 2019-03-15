@@ -15,7 +15,7 @@ users = [User('Roopam', 1),
         ]
 
 for user in sorted(users, key = attrgetter('name')):
-    print user
+    print(user)
 
 for user in sorted(users, key = attrgetter('userID')):
-    print user
+    print(user)
