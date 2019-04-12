@@ -1,2 +1,2 @@
 def testFn():
-    print 'Hello World'
+    print('Hello World')

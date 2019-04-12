@@ -7,5 +7,5 @@ fw.close()
 
 fr = open('textfile.txt', 'r')
 readText = fr.read()
-print readText
+print(readText)
 fr.close()

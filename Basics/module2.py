@@ -1,5 +1,5 @@
-import module1
+from module1 import testFn   #or import module1
 import random
 
-module1.testFn()
-print random.randint(1,2), random.randrange(100,1000)
+testFn()
+print(random.randint(1,2), random.randrange(100,1000, 10))

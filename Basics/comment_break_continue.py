@@ -5,7 +5,7 @@ print('Hello')
 
 #This is an example of single line comment
 
-print 'My value is ', 9
+print('My value is', 9)
 
 names = ['Roopam', 'Raj', 'Shubham', 'Anshul']
 for n in names[0:4]:
