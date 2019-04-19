@@ -47,16 +47,30 @@ class LinkedList:
         curr_node.next = new_node
 
     def deleteNode(self, value):
-        if head is None:
+        if self.head is None:
             return 'List is empty'
         elif self.head.data == value:
-            node = head
-            head = head.next
+            node = self.head
+            self.head = self.head.next
             node = None
         else:
-            curr_node = head
+            curr_node = self.head
             while curr_node.data != value:
                 curr_node = curr_node.next
+
+    def length(self):
+        curr_node = self.head
+        counter = 0
+        while curr_node is not None:
+            counter += 1
+            curr_node = curr_node.next
+        return counter
+
+    def len_recursive(self, node):
+        if node is None:
+            return 0
+        return 1 + self.len_recursive(node.next)
+
 
 testNode = Node(3)
 print(testNode.data, testNode.next)
@@ -68,6 +82,12 @@ testLinkedList.append(2)
 testLinkedList.append(3)
 testLinkedList.append(4)
 testLinkedList.prepend(0)
-testLinkedList.insert_after_node(7, .5)
+testLinkedList.insert_after_node(7, .5) 
 testLinkedList.insert_after_node(2, .5)
 testLinkedList.printList()
+print(testLinkedList.length())
+print(testLinkedList.len_recursive(testLinkedList.head))
+
+
+# text = '51d0079174baa712fd60c9c4a3f926dfc443e045423eb2b5a298589d56a3ff97'
+# print(len(text))
