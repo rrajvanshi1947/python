@@ -7,8 +7,10 @@ class Queue:
 
     def extract(self):
         if self.queue:
-            print(self.queue[0])
+            # print(self.queue[0])  
+            a = self.queue[0]
             self.queue = self.queue[1:]
+            return a
         #self.queue.pop(0)
 
     def empty(self):
@@ -17,13 +19,13 @@ class Queue:
     def printQ(self):
         print(self.queue)
 
-q = Queue()
-for i in range(5):
-    q.put(i)
-q.printQ()
-q.extract()
-print(q.empty())
-q.printQ()
-for i in range(4):
-    q.extract()
-print(q.empty())
+# q = Queue()
+# for i in range(5):
+#     q.put(i)
+# q.printQ()
+# q.extract()
+# print(q.empty())
+# q.printQ()
+# for i in range(4):
+#     q.extract()
+# print(q.empty())
