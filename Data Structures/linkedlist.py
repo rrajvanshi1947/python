@@ -19,8 +19,6 @@ class LinkedList:
 
     def prepend(self, data):
         new_node = Node(data)
-        if self.head is None:
-            self.head = new_node
         new_node.next = self.head
         self.head = new_node
 
@@ -48,15 +46,41 @@ class LinkedList:
 
     def deleteNode(self, value):
         if self.head is None:
-            return 'List is empty'
-        elif self.head.data == value:
-            node = self.head
+            return
+        if self.head.data == value:
+            temp = self.head
             self.head = self.head.next
-            node = None
+            temp = None
+        curr_node = self.head
+        prev = None
+        while curr_node:
+            prev = curr_node
+            if curr_node.data == value:
+                break
+            curr_node = curr_node.next
+        if curr_node is None:
+            return
         else:
-            curr_node = self.head
-            while curr_node.data != value:
-                curr_node = curr_node.next
+            prev = curr_node.next
+            curr_node = None
+
+    def deleteNodePosition(self, position):
+        if self.head is None:
+            return
+        if position == 1:
+            temp = self.head
+            self.head = self.head.next
+            temp = None
+        curr_node = self.head
+        for i in range(1, position - 1):
+            curr_node = curr_node.next
+            if curr_node is None:
+                break
+        if curr_node is None:
+            return
+        temp = curr_node.next
+        curr_node.next = curr_node.next.next
+        temp = None
 
     def length(self):
         curr_node = self.head
@@ -71,23 +95,51 @@ class LinkedList:
             return 0
         return 1 + self.len_recursive(node.next)
 
+    def swapNode(self, value1, value2):
+        if value1 == value2:
+            return
+        curr_node = self.head
+        # prev1 = prev2 = None
+        while curr_node:
+            # print(curr_node.data)
+            # prev1 = curr_node
+            if curr_node.data == value1 or curr_node.data == value2:
+                break
+            curr_node = curr_node.next
+        new_curr_node = curr_node
+        if curr_node.data == value1:
+            while new_curr_node and new_curr_node.data != value2:
+                new_curr_node = new_curr_node.next
+            curr_node.data, new_curr_node.data = new_curr_node.data, curr_node.data
+        else:
+            while new_curr_node and new_curr_node.data != value1:
+                new_curr_node = new_curr_node.next
+            curr_node.data, new_curr_node.data = new_curr_node.data, curr_node.data
+
+         
+        
+
+
 
 testNode = Node(3)
 print(testNode.data, testNode.next)
 
 testLinkedList = LinkedList()
 testLinkedList.deleteNode(4)
+testLinkedList.deleteNodePosition(3)
 testLinkedList.append(1)
 testLinkedList.append(2)
 testLinkedList.append(3)
 testLinkedList.append(4)
+testLinkedList.append(6)
+testLinkedList.append(8)
 testLinkedList.prepend(0)
 testLinkedList.insert_after_node(7, .5) 
 testLinkedList.insert_after_node(2, .5)
+# testLinkedList.printList()
+testLinkedList.deleteNodePosition(3)
+# testLinkedList.printList()
+testLinkedList.swapNode(0,1)
 testLinkedList.printList()
 print(testLinkedList.length())
 print(testLinkedList.len_recursive(testLinkedList.head))
-
-
-# text = '51d0079174baa712fd60c9c4a3f926dfc443e045423eb2b5a298589d56a3ff97'
-# print(len(text))

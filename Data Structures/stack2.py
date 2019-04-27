@@ -6,8 +6,12 @@ class Stack:
         self.stack.append(x)
     
     def pop(self):
-        return self.stack.pop()
-    
+        # return self.stack.pop()
+        if self.stack:          # If you cannot use the in-built pop() function
+            a = self.stack[-1]
+            self.stack = self.stack[:len(self.stack) - 1]
+            return a
+
     def peek(self):
         if self.stack:
             return self.stack[-1]
@@ -24,12 +28,14 @@ class Stack:
 # firstPythonStack = Stack()
 # print(firstPythonStack.getStack())
 # print(firstPythonStack.peek())
+# print(firstPythonStack.pop())
 # firstPythonStack.push(3)
 # firstPythonStack.push(4)
 # firstPythonStack.push(5)
 # print(firstPythonStack.getStack())
 # print(firstPythonStack.peek())
-# firstPythonStack.pop()
+# print(firstPythonStack.pop())
 # print(firstPythonStack.getStack())
 # firstPythonStack.delete()
 # print(firstPythonStack.peek())
+
