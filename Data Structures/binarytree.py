@@ -76,12 +76,44 @@ class BinaryTree:
             s.pop()
         return traversal
 
+    def height(self, start):
+        if not start:
+            return -1
+        leftheight = self.height(start.left)
+        rightheight = self.height(start.right)
+
+        return 1 + max(leftheight, rightheight)
+
+    def size(self, start):
+        if not start:
+            return 0
+        counter = 0
+        counter += self.size(start.left)
+        counter += self.size(start.right)
+        return 1 + counter
+
+    def sizewithStack(self, start):
+        if not start:
+            return 0
+        size = 1
+        s = Stack()
+        s.push(start)
+        while s.stack:
+            a = s.pop()
+            if a.left:
+                size += 1
+                s.push(a.left)
+            if a.right:
+                size += 1
+                s.push(a.right)
+        return size
 
 
 fTree = BinaryTree(1)
 fTree.root.left = Node(2)
 fTree.root.right = Node(3)
 fTree.root.left.left = Node(4)
+# fTree.root.left.left.right = Node(4)
 fTree.root.left.right = Node(5)
 fTree.root.right.left = Node(6)
 fTree.root.right.right = Node(7)
@@ -90,3 +122,6 @@ print(fTree.inorderPrint(fTree.root, ''))
 print(fTree.postorderPrint(fTree.root, ''))
 print(fTree.levelorderPrint(fTree.root))
 print(fTree.reverseorderPrint(fTree.root))
+print(fTree.height(fTree.root))
+print(fTree.size(fTree.root))
+print(fTree.sizewithStack(fTree.root))
