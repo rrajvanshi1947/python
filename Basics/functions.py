@@ -1,8 +1,6 @@
 #Defining Functions
 def printName(name):
     print("Your name is", name)   #No need to give space after is when using comma
-    # print"Your name is", name
-    # print "Your name is " + name
 
 printName('Roopam')
 
@@ -36,6 +34,7 @@ printThis(name='Shubham')
 #Flexible number of arguments
 def addNumbers(*args):
     sum = 0
+    print(args[1])
     for n in args:
         sum += n
     print(sum)

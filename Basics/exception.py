@@ -1,8 +1,7 @@
-while True:
+while(1):
     num = input('Input the number!\n')
     try:
-        print(4, num)
-        
+        print(4, num)  
     except NameError:
         print('You are supposed to enter a number.')
     except ZeroDivisionError:

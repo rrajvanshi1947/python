@@ -1,3 +1,3 @@
-power = lambda x: x**2
+power = lambda x: print(x**2)
 
-print(power(25))
+power(25)

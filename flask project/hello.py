@@ -27,7 +27,7 @@ def hello_python():
 
 @app.route('/success/<name>')
 def success(name):
-    return '%s has successfully logged in!' % name
+    return '%s has successfully logged in!' % (name.capitalize())
 
 # POST, GET Methods
 @app.route('/login', methods = ['POST', 'GET'])

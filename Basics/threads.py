@@ -1,7 +1,6 @@
 import threading
 
 class ExampleThread(threading.Thread):
-
     def run(self):
         for _ in range(5):
             print(threading.currentThread().getName())

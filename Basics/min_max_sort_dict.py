@@ -6,5 +6,5 @@ prices = {
 }
 
 print(min(zip(prices.values(), prices.keys())))
-print(max(zip(prices.values(), prices.keys())))
-print(sorted(zip(prices.values(), prices.keys())))
+print(max(zip(prices.keys(), prices.values())))
+print(sorted(zip(prices.keys(), prices.values())))
