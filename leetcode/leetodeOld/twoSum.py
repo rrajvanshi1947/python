@@ -33,7 +33,3 @@ print(twoSum([1,2,3,4,5,6,7,8,9], 12 ))
 #         else:
 #             List.append(item)
 #     return List
-
-# givenList = ['Roopam', 'Divya', 'Roopam', 'Anshul', 'Rahul', 'Anshul', 'Divya']
-
-# print(findDuplicate(givenList))

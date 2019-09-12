@@ -13,3 +13,15 @@ def reach(a):
             maxReach = max(maxReach, a[i]+i)
 
 print(reach(A))
+
+#Second practice
+def arrayAdvance(arr):
+    maxReach = 0
+    for i in range(len(arr)):
+        if maxReach >= len(arr) - 1:
+            return True
+        if i > maxReach:
+            return False
+        maxReach = max(maxReach, arr[i] + i)
+
+print(arrayAdvance([]))
