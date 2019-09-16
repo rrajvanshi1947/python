@@ -9,10 +9,12 @@ else:
     print(firstSet)
 
 newSet = set([1,2,3,4,5])
+print(type(newSet))
 print(newSet)
 newSet.add(6)
 print(newSet)
-newSet.update([7,8])
+newSet2 = {8,9}
+newSet.update([7,8], newSet2)
 print(newSet)
 newSet.remove(8)    #Remove will throw error in case the value is not in set but discard won't
 newSet.discard(7)

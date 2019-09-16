@@ -1,0 +1,305 @@
+im{port React, {Component} from 'react';
+import '../../App.css';
+import axios from 'axios';
+import {Redirect} from 'react-router';
+import {Link} from 'react-router-dom';
+import decode from 'jwt-decode';
+import Data from '../Data/Data'
+import ConsolidatedData from '../ConsolidatedData/ConsolidatedData';
+import download from './download.png';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
+
+class Dashboard extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            email : decode(localStorage.getItem('usertoken')).identity.email,
+            first_name: decode(localStorage.getItem('usertoken')).identity.first_name,
+            last_name: decode(localStorage.getItem('usertoken')).identity.last_name,
+            vms: [],
+            selectedVm: '',
+            data: [],
+            alldata: [],
+            authFlag: false,
+            authFlagSecond: false,
+            traffic: [],
+            vm: '',
+            startDate: '',
+            endDate: '',
+            startDate2: '',
+            endDate2: new Date(),
+            events: []
+        }
+        this.handleLogout = this.handleLogout.bind(this);
+        this.showData = this.showData.bind(this)
+        this.showConsolidatedData = this.showConsolidatedData.bind(this)
+
+        this.vmChangeHandler = this.vmChangeHandler.bind(this)
+        this.startDateChangeHandler = this.startDateChangeHandler.bind(this)
+        this.endDateChangeHandler = this.endDateChangeHandler.bind(this)
+        this.startDate2ChangeHandler = this.startDate2ChangeHandler.bind(this)
+        this.endDate2ChangeHandler = this.endDate2ChangeHandler.bind(this)
+    }
+
+    componentDidMount(){ 
+	var g = new Date()
+	g.setHours(g.getHours() - 1)
+	this.setState({"startDate2": g})
+
+        axios
+        .get(`/getvms`)
+        .then(response => {
+            console.log(response)
+          this.setState({
+            vms: this.state.vms.concat(response.data.hits.hits)
+          });
+        });
+    }
+
+    startDateChangeHandler(date) {
+        console.log(date)
+        var d = new Date(date);
+        // var e = d.toISOString();
+        this.setState({startDate: d})
+        console.log(this.state.startDate)
+      }
+    
+      endDateChangeHandler(date) {
+        console.log(date)
+        var d = new Date(date);
+        this.setState({endDate: d})
+        console.log(this.state.endDate)
+      }
+
+      startDate2ChangeHandler(date) {
+        console.log(date)
+        var d = new Date(date);
+        // var e = d.toISOString();
+        this.setState({startDate2: d})
+        console.log(this.state.startDate2)
+      }
+    
+      endDate2ChangeHandler(date) {
+        console.log(date)
+        var d = new Date(date);
+        this.setState({endDate2: d})
+        console.log(this.state.endDate2)
+      }
+    
+      vmChangeHandler(e) {
+          console.log(e.target.name)
+        this.setState({vm: e.target.name})
+        console.log(this.state)
+      }
+
+    handleLogout() {
+        localStorage.clear()
+        return <Redirect to='/' />
+      }
+
+    showData(e){
+        e.preventDefault();
+    console.log("Request to get vm data");
+    axios.defaults.withCredentials = true;
+    console.log(this.state.startDate)
+    console.log(this.state.endDate)
+    console.log(this.state.vm)
+        axios
+        .get(`/search`, {
+            params: {
+                startDate: this.state.startDate,
+                endDate: this.state.endDate,
+                vm: this.state.vm
+            }
+        })
+        .then(response => {
+            console.log(response)
+          this.setState({
+            authFlagSecond: false,
+	    data:response.data.hits.hits,
+            authFlag: true
+          });
+        });
+        console.log(this.state.data)
+    }
+
+    showConsolidatedData(e){
+        e.preventDefault();
+        console.log('Inside consolidate fn')
+        console.log(this.state.startDate2)
+        console.log(this.state.endDate2)
+
+        axios.defaults.withCredentials = true;
+        axios
+        .get(`/searchall`, {
+            params: {
+                startDate2: this.state.startDate2,
+                endDate2: this.state.endDate2,
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+            var a = response.data[0].hits.hits
+            var events = response.data[1].hits.hits
+            var uniqueAddressess = [...new Set(a.map(data => {var f = {"destination": data._source.monitor.ip, "source": data._source.observer.ip[2]}; return f}))]      //Object.create({"destination": data._source.monitor.ip, "source": data._source.observer.ip[2]})
+        console.log(uniqueAddressess)
+
+    var uniqueAddressess2 =  uniqueAddressess.filter((obj, pos, arr) => {
+        return [...new Set(arr.map(mapObj => mapObj["destination"]))].indexOf(obj["destination"]) === pos
+    })
+    console.log(uniqueAddressess2)
+
+    uniqueAddressess2.forEach((item, i) => {
+        let d = {}
+        d[item.destination] = item.source
+        console.log(d)
+        // item = d
+        uniqueAddressess2[i] = d
+        console.log(item)
+    })
+    console.log(uniqueAddressess2)
+
+    var r = {}
+    uniqueAddressess2.forEach(item => {
+        r[Object.keys(item)[0]] = item[Object.keys(item)[0]]
+    })
+    console.log(r)
+
+    axios.post('/matchip', r)
+        .then(response =>{
+            console.log(response)
+            this.setState({
+                traffic: this.state.traffic.concat(response.data),
+                authFlag: false,
+                alldata: a,
+                authFlagSecond: true,
+                events: this.state.events.concat(events)
+                  });
+            console.log(this.state.traffic)
+        })
+        })
+        };
+        
+
+    render(){
+        console.log(decode(localStorage.getItem('usertoken')))
+        console.log(this.state.data)
+
+        console.log(this.state.authFlag)
+        console.log(this.state.authFlagSecond)
+        console.log(this.state.traffic)
+
+        return(
+            <div>
+                <ul class="nav navbar-nav navbar-left">
+                        <li><img src={download} width="50" height="30" position="absolute"left="10" top= "10"alt="Italian Trulli" /></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                        <li><Link to="/" onClick={this.handleLogout}><span class="glyphicon glyphicon-log-in"></span> Logout</Link></li>
+                </ul>
+                <br></br>
+                <br></br>
+
+
+
+
+                <div style = {{width: "55%", border: "1px lightgrey", "backgroundColor": "light-grey", position: "absolute", left: '20px', top: '0px', marginLeft: "20%", marginTop: "15%", padding: "25px", margin: "25px"}} >
+<form action="" class="form-inline">
+<div class="form-group">
+
+<label for="rg-from"><strong>View Chart</strong></label>
+
+<div class="row">
+    <div class="col-md-6">
+        <span><strong>Start date</strong></span>
+    </div>
+    <div class="col-md-6">
+        <span><strong>End date</strong></span>
+    </div>
+</div>
+
+<br/> 
+
+<div class="row">
+    <div class="col-md-6">
+<style>
+          {`.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+            padding-left: unset;
+            padding-right: unset;
+            width: 100px;
+        }
+        
+        .react-datepicker__input-container {
+                width:100%;
+        }
+        
+        .react-datepicker-wrapper {
+                width:100%;
+        }
+        
+        .react-datepicker {
+                width: 223px;
+        }`}
+        </style>
+<DatePicker
+selected={this.state.startDate2}    
+onChange={this.startDate2ChangeHandler}
+showTimeSelect
+    timeFormat="HH:mm"
+    timeIntervals={15}
+    dateFormat="MMMM d, yyyy h:mm aa"
+    timeCaption="time"
+/>
+</div>
+<div class="col-md-6">
+    <DatePicker
+selected={this.state.endDate2}
+onChange={this.endDate2ChangeHandler} style={{position: "relative", left: '50px'}}
+
+showTimeSelect
+    timeFormat="HH:mm"
+    timeIntervals={15}
+    dateFormat="MMMM d, yyyy h:mm aa"
+    timeCaption="time"
+
+/></div><br/>
+<br></br>
+<div class="col-md-3">
+<button type="submit" class="btn btn-primary" onClick = {this.showConsolidatedData}>Submit</button>
+</div>
+</div>
+</div>
+</form>
+
+</div>
+
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+
+            <div>
+                {console.log('Inside control change to data')}
+            { this.state.authFlag===true ? <Data data={this.state.data}/> : null }
+            </div>
+            <div>
+                {console.log('Inside control change to Consolidated data')}
+            { this.state.authFlagSecond===true ? <ConsolidatedData dataTwo={this.state.alldata} traffic = {this.state.traffic} startDate={this.state.startDate2} endDate={this.state.endDate2} events={this.state.events}  flag={true} /> : null }
+            </div>
+            </div>
+        )
+    }
+
+}
+export default Dashboard;
+
+

@@ -6,7 +6,8 @@ class Stack:
         self.itemlist.append(value)
 
     def pop(self):
-        return self.itemlist.pop()
+        if self.itemlist:
+            return self.itemlist.pop()
 
     def isEmpty(self):
         return self.itemlist == []
@@ -19,6 +20,7 @@ class Stack:
         return self.itemlist
 
 new = Stack()
+print(new.pop())
 new.push(3)
 new.push(4)
 new.push(5)
@@ -29,3 +31,5 @@ print(new.getStack())
 print(new.pop())
 print(new.pop())
 print(new.isEmpty())    
+
+

@@ -18,3 +18,4 @@ import time
 
 print('Memory (Before): {}Mb'.format(mem_profile.memory_usage_psutil()))
 t1 = time.clock()
+print(t1)
