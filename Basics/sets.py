@@ -31,4 +31,4 @@ print(s1.difference(s2))
 print(s2.difference(s1, s3))
 print(s1.symmetric_difference(s2))
 
-#Sets have O(1) complexity for some reason. Maybe they represent dictionaries
+#Sets have O(1) complexity as they are hashed.

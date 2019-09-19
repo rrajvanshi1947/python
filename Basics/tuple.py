@@ -15,7 +15,3 @@ print(a)
 
 #Also a tuple
 b = 'abc', -4.24e93, 18+6.6j, 'xyz'
-
-a =[]
-for a in a:
-    print(a)

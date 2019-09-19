@@ -7,4 +7,4 @@ def progress_days(runs):
 			progressDays += 1
 	return progressDays
 
-print(progress_days([1,3,2,4]))
+print(progress_days([1,3,2,4,5]))

@@ -31,7 +31,7 @@ print(age)
 
 students = {'Roopam': 'Employed', 'Ravi': 'Employed', 'Divya': 'Employed', 'Anshul': 'Employed', 'X': 'Unemployed', 'Y': 'Unemployed'}
 
-for k in students:
+for k in students:              #for loop for keys in dic is not in sequential order
     if students[k] == 'Unemployed':
         print(k, 'is unemployed.')
         break           #You've to use break
