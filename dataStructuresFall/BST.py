@@ -4,7 +4,7 @@ class Node():
         self.left = None
         self.right = None
 
-class BST(Node):
+class BST():
     def __init__(self, value):
         self.root = Node(value)
         
