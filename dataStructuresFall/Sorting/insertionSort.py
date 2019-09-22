@@ -11,5 +11,5 @@ def insertionSort(a):
     
     return a
 
-arr = [2,4,1,3,7,2,7,0]
+arr = [1,1,1,3,-17,2,7,0]
 print(insertionSort(arr))
