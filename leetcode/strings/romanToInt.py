@@ -119,3 +119,7 @@ class Solution(object):
         
 example = Solution()
 print(example.romanToInt('MCMXCIV'))
+
+dic = {'a': 2, "b": 3}
+dic = {'c':3}
+print(list(dic.values())[0])
