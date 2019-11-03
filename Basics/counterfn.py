@@ -23,3 +23,4 @@ print(list(a.items()))
 
 a = defaultdict(bytes)
 print(a[1])
+

@@ -3,7 +3,7 @@ print(a)
 print(type(a))
 
 b = bytes(b'\xFF\xDD\xdd')
-print(b)
+print(b[1])
 print(type(b))
 
 c = bytearray(3)

@@ -9,3 +9,6 @@ print(a | b)    #111011
 
 # Right shift
 print(a >> 2)   #001100    
+
+dic = {'a':2}
+if 'a'

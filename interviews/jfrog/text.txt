@@ -1,0 +1,3 @@
+ThIs is from within the text file!
+Hello from IndIa.
+We'll play wIth SED now.

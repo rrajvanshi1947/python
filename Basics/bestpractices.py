@@ -13,7 +13,7 @@ FInally is executed even if an exception occurs and there in no except: paramete
 universities = ['SJSU', 'UCLA', 'MIT', 'NYU', 'Penn', 'Stanford']
 
 first, *rest, last = universities
-print(rest)
+print(rest, first, last)
 
 for i, university in enumerate(universities):
     print(i, university)
@@ -26,7 +26,7 @@ x,y = y,x
 print(x,y)
 
 dic = {'R': 28, 'D': 28}
-age = dic.get('D', 'unknown')
+age = dic.get('E', 'unknown')
 print(age)
 
 students = {'Roopam': 'Employed', 'Ravi': 'Employed', 'Divya': 'Employed', 'Anshul': 'Employed', 'X': 'Unemployed', 'Y': 'Unemployed'}
@@ -35,15 +35,15 @@ for k in students:              #for loop for keys in dic is not in sequential o
     if students[k] == 'Unemployed':
         print(k, 'is unemployed.')
         break           #You've to use break
-else:
-    print('All are employed! :)')
 
     #Looping through a list in a reversed way
 
 colors = ['blue', 'violet', 'magenta', 'red', 'yellow']
+b = [color for color in reversed(colors)]
+print(b)
 
-# for color in reversed(colors):
-#         print(color)
-
-for color in sorted(colors, reverse = True):
+for color in reversed(colors):
         print(color)
+
+# for color in sorted(colors, reverse = True):
+#         print(color)

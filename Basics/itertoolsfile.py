@@ -4,6 +4,7 @@ data = 'abbcddaaafffccg'
 
 # keys = groups = lengths = []
 sorte = sorted(data)
+print(sorte)
 keys = [(k, len(list(g))) for k, g in itertools.groupby(data)]
 print(keys)
 groups = [list(g) for k, g in itertools.groupby(data)]
@@ -51,3 +52,5 @@ b = [1,0,0,1,0]
 b.extend([3]*2)
 print(b)
 print(-0)
+
+print('!'.isalnum())
