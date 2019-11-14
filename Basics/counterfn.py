@@ -24,3 +24,10 @@ print(list(a.items()))
 a = defaultdict(bytes)
 print(a[1])
 
+print(bin(int('101',2) - int('10',2)))
+
+print(max(('breakfast', 'lunch'), key = len))
+
+s = ['latz', 'latte']
+s.sort()
+print(s)

@@ -35,3 +35,6 @@ print(findMedianSortedArrays(a,b))
 
 z = ['a', 'b', '.', 'c']
 print(''.join(z).replace('.',''))
+
+a = {(i,1) for i in range(5)}
+print(a)

@@ -37,3 +37,25 @@ print(checkBalance(fr))
 print('Memory (After): ' + str(mem_profile.memory_usage()) + 'MB' )
 t2 = time.clock()
 print((t2-t1)*1000, 'ms')
+
+arr = [[0]*6 for i in range(6)]
+for i in range(6):
+    arr[i][i] = 1
+print(arr)
+
+
+        # if s =="":
+        #     return s
+        # length=''
+        # s1=s[::-1]
+ 
+        # for c,i in enumerate(s):
+        #     for m,j in enumerate(s1):
+        #         if i == j:
+        #             temp=s[c:len(s)-m]
+        #             if temp == temp[::-1]:
+        #                 length = max(length, temp, key = len)
+        #                 break
+        
+        # return length
+                    

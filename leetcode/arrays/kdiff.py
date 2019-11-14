@@ -1,3 +1,4 @@
+import math
 def findPairs(nums, k):
     if not nums or k < 0:
             return 0
@@ -26,3 +27,8 @@ n = 1
 def f(n):
     return False if n else True
 print(f(n))
+
+print(int(math.log10(10)))
+a = 'abc'
+print(a.split())
+print(ord('A'), ord('a'))
